@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 19 Genómica y Biología Molecular de ARNs - Cinvestav</title>
+    <meta name="description" content="Investigación en genómica y biología molecular del ARN, interacciones ARN-proteína e inmunidad innata en el Laboratorio 19 de Cinvestav-IPN, Zacatenco.">
+    <meta name="theme-color" content="#006d64">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Laboratorio 19 · Genómica y Biología Molecular de ARNs">
+    <meta property="og:description" content="Investigación sobre ARN, proteínas e inmunidad innata en Cinvestav-IPN, Unidad Zacatenco.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Scientific Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lab-teal: rgb(0, 149, 135);
+            --lab-teal-dark: #006d64;
+            --lab-teal-light: #e6f5f3;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        html, body {
+            background-color: #ffffff !important;
+        }
+        section[id],
+        #team {
+            scroll-margin-top: 6rem;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.3);
+        }
+        .glow-neon {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+        }
+        .glow-violet {
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.3);
+        }
+        body .bg-darkbg,
+        body .bg-cardbg,
+        body .bg-slate-800,
+        body .bg-slate-900,
+        body .bg-slate-950 {
+            background-color: #ffffff !important;
+        }
+        body .text-slate-100,
+        body .text-slate-200,
+        body .text-slate-300,
+        body .text-slate-400,
+        body .text-slate-500 {
+            color: #334155 !important;
+        }
+        body .border-slate-800,
+        body .border-slate-700,
+        body .border-slate-900 {
+            border-color: #e2e8f0 !important;
+        }
+        body header {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-color: #e2e8f0 !important;
+        }
+        body .text-cyan-400,
+        body .text-cyan-500,
+        body .text-cyan-600,
+        body .text-emerald-400,
+        body .text-emerald-500,
+        body .text-emerald-600,
+        body .text-violet-400,
+        body .text-violet-500,
+        body .text-violet-600 {
+            color: var(--lab-teal-dark) !important;
+        }
+        body .bg-cyan-600 {
+            background-color: var(--lab-teal) !important;
+        }
+        body .hover\:bg-cyan-700:hover {
+            background-color: var(--lab-teal-dark) !important;
+        }
+        .section-banner {
+            border-radius: 1.25rem;
+            padding: 1.5rem 1.75rem;
+            color: #ffffff;
+            background: linear-gradient(115deg, var(--lab-teal-dark), var(--lab-teal));
+            box-shadow: 0 12px 28px -18px rgba(0, 109, 100, 0.75);
+        }
+        .section-banner h2,
+        .section-banner h3,
+        .section-banner p {
+            color: #ffffff !important;
+        }
+        .section-banner p {
+            opacity: 0.9;
+        }
+        .accent-button {
+            color: #ffffff !important;
+            background-color: var(--lab-teal) !important;
+        }
+        .accent-button:hover {
+            background-color: var(--lab-teal-dark) !important;
+        }
+        .filter-control {
+            min-height: 2.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            background: #ffffff;
+            padding: 0.625rem 0.875rem;
+            color: #0f172a;
+        }
+        .filter-control:focus-visible,
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(0, 149, 135, 0.45);
+            outline-offset: 3px;
+        }
+        [hidden] {
+            display: none !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-slate-100 min-h-screen selection:bg-cyan-500 selection:text-black">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkbg/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-teal-700 flex items-center justify-center shadow-lg shadow-teal-700/30">
+                    <i class="fa-solid fa-dna text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-teal-800">Laboratorio 19 · Genómica y Biología Molecular de ARNs</span>
+                    <p class="text-xs text-slate-400 font-mono">Cinvestav · Departamento de Genética y Biología Molecular</p>
+                </div>
+            </div>
+            <nav aria-label="Navegación principal" class="hidden xl:flex items-center gap-5 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors">Inicio</a>
+                <a href="#research" class="text-slate-300 hover:text-cyan-400 transition-colors">Investigación</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Proyectos</a>
+                <a href="#publications" class="text-slate-300 hover:text-cyan-400 transition-colors">Publicaciones</a>
+                <a href="#team" class="text-slate-300 hover:text-cyan-400 transition-colors">Equipo</a>
+                <a href="#methods" class="text-slate-300 hover:text-cyan-400 transition-colors">Técnicas y recursos</a>
+                <a href="#news" class="text-slate-300 hover:text-cyan-400 transition-colors">Noticias</a>
+                <a href="#contact" class="accent-button px-4 py-2 rounded-lg transition-all font-mono text-xs">Colaboración</a>
+            </nav>
+            <button id="mobile-menu-btn" type="button" class="xl:hidden text-slate-700 hover:text-cyan-400 focus:outline-none text-xl p-2" aria-label="Abrir menú de navegación" aria-controls="mobile-menu" aria-expanded="false">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+        <nav id="mobile-menu" aria-label="Navegación móvil" class="hidden xl:hidden px-4 pt-2 pb-4 border-t border-slate-200 bg-white">
+            <a href="#about" class="block py-2 text-slate-700 hover:text-teal-800">Inicio</a>
+            <a href="#research" class="block py-2 text-slate-700 hover:text-teal-800">Investigación</a>
+            <a href="#projects" class="block py-2 text-slate-700 hover:text-teal-800">Proyectos</a>
+            <a href="#publications" class="block py-2 text-slate-700 hover:text-teal-800">Publicaciones</a>
+            <a href="#team" class="block py-2 text-slate-700 hover:text-teal-800">Equipo</a>
+            <a href="#methods" class="block py-2 text-slate-700 hover:text-teal-800">Técnicas y recursos</a>
+            <a href="#news" class="block py-2 text-slate-700 hover:text-teal-800">Noticias</a>
+            <a href="#contact" class="block py-2 text-teal-800 font-semibold">Colaboración y contacto</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-24">
+
+        <section id="about" class="space-y-8 pt-8">
+            <div class="rounded-3xl border border-slate-200 shadow-2xl overflow-hidden glow-cyan bg-white">
+                <div class="relative min-h-[500px] lg:min-h-[620px]">
+                    <img src="laboratorio.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&q=80';" alt="Laboratorio de Genómica y Biología Molecular" class="w-full h-[500px] lg:h-[620px] object-cover object-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/10 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-7">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-mono">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Laboratorio 19 · Genómica y Biología Molecular de ARNs
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="team" class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+                <div class="section-banner rounded-none">
+                    <p class="text-sm font-mono uppercase tracking-widest">Investigador Cinvestav · 2C</p>
+                    <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">Dr. Rodolfo Gamaliel Ávila Bonilla</h1>
+                    <p class="mt-2 text-lg">Titular del Laboratorio 19 · Genómica y Biología Molecular de ARNs</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 p-6 sm:p-9">
+                    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                        <img src="rodolfo-avila.jpg" alt="Fotografía del Dr. Rodolfo Gamaliel Ávila Bonilla" class="w-full aspect-[4/5] object-cover" onerror="this.hidden=true;this.nextElementSibling.classList.remove('hidden')">
+                        <div class="hidden aspect-[4/5] flex flex-col items-center justify-center gap-3 p-5 text-center text-slate-600">
+                            <i class="fa-solid fa-user-doctor text-5xl text-teal-700" aria-hidden="true"></i>
+                            <p class="font-semibold">Fotografía del investigador</p>
+                            <p class="text-sm">Coloca <span class="font-mono">rodolfo-avila.jpg</span> junto al HTML.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-700">
+                            <a class="inline-flex items-center gap-2 hover:text-teal-800" href="tel:+525557473800"><i class="fa-solid fa-phone text-teal-700" aria-hidden="true"></i> +52 55 5747 3800 · ext. 5322</a>
+                            <a class="inline-flex items-center gap-2 hover:text-teal-800" href="mailto:rodolfo.avilab@cinvestav.mx"><i class="fa-solid fa-envelope text-teal-700" aria-hidden="true"></i> rodolfo.avilab@cinvestav.mx</a>
+                        </div>
+                        <div class="border-t border-slate-200 pt-5">
+                            <h2 class="text-2xl font-bold text-slate-900">Semblanza</h2>
+                            <p class="mt-3 text-base leading-8 text-slate-700">
+                                Realizó una estancia como Investigador Postdoctoral Asociado en el Institute of Immunology and Infection de la Universidad de Edimburgo, Reino Unido, y posteriormente fue investigador postdoctoral en el Instituto Politécnico Nacional (IPN). Obtuvo el Doctorado en Ciencias en Biotecnología y la Maestría en Ciencias en Biomedicina Molecular por el IPN, ambos con la distinción Cum Laude. Actualmente dirige el Laboratorio de Genómica y Biología Molecular del ARN en el Departamento de Genética y Biología Molecular del Cinvestav, en Ciudad de México. Su investigación busca comprender cómo se discriminan los ARN propios y no propios y cómo esta regulación influye en la activación de la inmunidad innata.
+                            </p>
+                        </div>
+                        <div class="rounded-xl border border-teal-100 bg-teal-50 p-4 text-sm text-slate-700">
+                            <p class="font-semibold text-slate-800">Equipo de investigación</p>
+                            <p class="mt-1">El investigador responsable identificado en este sitio es el Dr. Rodolfo Gamaliel Ávila Bonilla. <span class="font-medium">[COMPLETAR: estudiantes, investigadores posdoctorales y colaboradores, con autorización para publicar sus perfiles]</span></p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section id="research" class="space-y-12">
+            <div class="section-banner">
+                <p class="text-sm font-mono uppercase tracking-widest">Cómo investigamos</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight">Líneas de investigación</h2>
+                <p class="mt-2">Integramos aproximaciones experimentales y computacionales para estudiar la regulación del ARN, sus proteínas asociadas y su papel en la inmunidad innata.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-cyan-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-dna text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-3">Interacciones ARN-proteína</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Estudiamos cómo las modificaciones postranscripcionales del ARN influyen en su reconocimiento y unión por proteínas celulares.
+                        </p>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600"><strong>Pregunta central:</strong> ¿cómo modifican las marcas del ARN su interacción con proteínas celulares? <span class="block mt-1"><strong>Enfoque:</strong> aproximaciones experimentales y bioinformáticas mencionadas en el sitio.</span></p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-2 text-xs font-mono text-cyan-400">
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">RBP</span>
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">Modificaciones de ARN</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-emerald-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-virus text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-3">ARN viral e inmunidad innata</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Analizamos cómo las proteínas de unión a ARN participan en la detección de virus de ARN y en la activación de la respuesta inmunitaria innata.
+                        </p>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600"><strong>Pregunta central:</strong> ¿cómo contribuyen las proteínas de unión a ARN al reconocimiento de virus de ARN y a la respuesta innata?</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-2 text-xs font-mono text-emerald-400">
+                        <span class="bg-emerald-500/10 px-2 py-1 rounded">Virus de ARN</span>
+                        <span class="bg-emerald-500/10 px-2 py-1 rounded">RBPs</span>
+                        <span class="bg-emerald-500/10 px-2 py-1 rounded">Inmunidad</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-violet-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-flask text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-3">Regulación molecular del ARN</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Caracterizamos muestras y complejos moleculares mediante proteómica, espectrometría de masas, secuenciación Nanopore y microscopía confocal para visualizar interacciones.
+                        </p>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600"><strong>Pregunta central:</strong> ¿qué mecanismos regulan la expresión y función de ARN en los sistemas estudiados? Los vínculos con proyectos y publicaciones específicos están por documentar.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-2 text-xs font-mono text-violet-400">
+                        <span class="bg-violet-500/10 px-2 py-1 rounded">Proteómica</span>
+                        <span class="bg-violet-500/10 px-2 py-1 rounded">Nanopore</span>
+                        <span class="bg-violet-500/10 px-2 py-1 rounded">Confocal</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-cyan-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-terminal text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-3">Bioinformática y modelado</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Procesamos datos en clústeres HPC y desarrollamos análisis con aprendizaje profundo, edición CRISPR-Cas y flujos de dinámica y docking molecular para apoyar el diseño de fármacos.
+                        </p>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600"><strong>Enfoque:</strong> análisis computacional como complemento de la investigación experimental; los proyectos asociados deben confirmarse.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap gap-2 text-xs font-mono text-cyan-400">
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">R / Python</span>
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">Slurm HPC</span>
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">CRISPR-Cas</span>
+                        <span class="bg-cyan-500/10 px-2 py-1 rounded">IA · Docking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="space-y-10">
+            <div class="section-banner">
+                <p class="text-sm font-mono uppercase tracking-widest">Investigación en curso</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight">Proyectos de investigación</h2>
+                <p class="mt-2">Líneas relevantes y proyectos actuales del laboratorio.</p>
+            </div>
+            <div class="space-y-5"><h3 class="text-xl font-bold text-slate-800">Temas documentados en el sitio</h3><p class="text-sm text-slate-600">Estos temas describen el enfoque científico del laboratorio y no se presentan como proyectos independientes confirmados.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <article class="rounded-2xl border border-cyan-100 bg-white p-6 shadow-sm"><i class="fa-solid fa-shield-virus text-2xl text-cyan-600" aria-hidden="true"></i><h4 class="mt-4 font-bold text-slate-800">Discriminaci&oacute;n entre ARN propio y no propio</h4><p class="mt-2 text-sm leading-relaxed text-slate-500">Mecanismos moleculares mediante los que el sistema inmunol&oacute;gico reconoce ARN end&oacute;geno y ex&oacute;geno.</p></article>
+                <article class="rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm"><i class="fa-solid fa-dna text-2xl text-emerald-600" aria-hidden="true"></i><h4 class="mt-4 font-bold text-slate-800">ARN no codificantes e inmunidad innata</h4><p class="mt-2 text-sm leading-relaxed text-slate-500">Implicaciones transcripcionales de los ncRNAs y su influencia en la respuesta inmunitaria innata.</p></article>
+                <article class="rounded-2xl border border-violet-100 bg-white p-6 shadow-sm"><i class="fa-solid fa-link text-2xl text-violet-600" aria-hidden="true"></i><h4 class="mt-4 font-bold text-slate-800">Prote&iacute;nas de uni&oacute;n a ARN (RBPs)</h4><p class="mt-2 text-sm leading-relaxed text-slate-500">Efecto de las RBPs en la regulaci&oacute;n y activaci&oacute;n de la inmunidad innata.</p></article>
+            </div></div>
+            <div class="space-y-5">
+                <h3 class="text-xl font-bold text-slate-800">Proyectos mencionados como actuales en el sitio</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="Filtros de proyectos">
+                    <label class="text-sm font-medium text-slate-700">Línea de investigación
+                        <select id="project-line-filter" class="filter-control mt-1 block w-full">
+                            <option value="all">Todas las líneas</option>
+                            <option value="genomica">Genómica</option>
+                            <option value="proteomica">Proteómica</option>
+                            <option value="arn">ARN</option>
+                            <option value="virologia">Virología</option>
+                        </select>
+                    </label>
+                    <label class="text-sm font-medium text-slate-700">Estado del proyecto
+                        <select id="project-status-filter" class="filter-control mt-1 block w-full">
+                            <option value="all">Todos los estados</option>
+                            <option value="en-desarrollo">En desarrollo, según el sitio</option>
+                            <option value="activo">Activo (por validar)</option>
+                            <option value="concluido">Concluido</option>
+                        </select>
+                    </label>
+                </div>
+                <p id="project-filter-status" class="text-sm text-slate-600" role="status" aria-live="polite"></p>
+                <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <article data-project data-line="genomica" data-status="en-desarrollo" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="text-xs font-mono uppercase tracking-wide text-cyan-700">Genómica · Células pluripotentes</p>
+                        <h4 class="mt-3 font-bold leading-relaxed text-slate-800">Locus-specific Alu transcription in pluripotent stem cells and teratocarcinoma: genomic context and functional associations</h4>
+                    </article>
+                    <article data-project data-line="proteomica" data-status="en-desarrollo" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="text-xs font-mono uppercase tracking-wide text-emerald-700">Proteómica · CAPAM</p>
+                        <h4 class="mt-3 font-bold leading-relaxed text-slate-800">Proteomic landscape regulation by mRNA cap-methyltransferase (CAPAM) in human germ cell line PA-1</h4>
+                    </article>
+                    <article data-project data-line="arn" data-status="en-desarrollo" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="text-xs font-mono uppercase tracking-wide text-violet-700">ARN vault · Cáncer</p>
+                        <h4 class="mt-3 font-bold leading-relaxed text-slate-800">Vault RNAs keep a conserved G-rich region, and an anticancer drug keeps docking there</h4>
+                    </article>
+                    <article data-project data-line="virologia" data-status="en-desarrollo" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="text-xs font-mono uppercase tracking-wide text-cyan-700">Virología · Meta-transcriptómica</p>
+                        <h4 class="mt-3 font-bold leading-relaxed text-slate-800">Integrative Meta-Transcriptomics for the Identification of Molecular Vulnerabilities in Viral Infections</h4>
+                    </article>
+                </div>
+                <p id="project-empty-state" hidden class="rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">No hay proyectos que coincidan con estos filtros.</p>
+            </div>
+        </section>
+
+        <section id="publications" class="space-y-8">
+            <div class="section-banner">
+                <p class="text-sm font-mono uppercase tracking-widest">Producción científica</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight">Publicaciones científicas</h2>
+                <p class="mt-2">Consulta las publicaciones del grupo con datos bibliográficos verificables.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+                <p class="font-semibold text-slate-800">Referencias bibliográficas pendientes de validar</p>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">El contenido disponible en esta página no incluye autores, revista, año ni DOI completos. Los cuatro títulos en inglés se conservan en proyectos, donde estaban publicados originalmente; no se presentan aquí como artículos confirmados.</p>
+                <p class="mt-3 text-sm text-slate-600">[COMPLETAR: título, autores, revista, año, DOI o enlace editorial, resumen y temas de cada publicación verificada]</p>
+            </div>
+        </section>
+
+        <section id="methods" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 space-y-8 shadow-xl">
+            <div class="section-banner">
+                <p class="text-sm font-mono uppercase tracking-widest">De la muestra al modelo</p>
+                <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Técnicas y plataformas</h2>
+                <p class="mt-2 text-sm">Enfoques experimentales y computacionales que conectan datos moleculares con mecanismos biológicos.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="rounded-2xl border border-cyan-100 bg-cyan-50 p-5"><i class="fa-solid fa-dna text-xl text-cyan-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">ARN · expresión génica · genómica</p><h3 class="mt-2 font-bold text-slate-800">Secuenciaci&oacute;n</h3><p class="mt-1 text-sm text-slate-600">RNA-Seq y secuenciaci&oacute;n de lectura larga con Oxford Nanopore.</p></div>
+                <div class="rounded-2xl border border-emerald-100 bg-emerald-50 p-5"><i class="fa-solid fa-vial-circle-check text-xl text-emerald-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Biología molecular · bioquímica</p><h3 class="mt-2 font-bold text-slate-800">Prote&oacute;mica</h3><p class="mt-1 text-sm text-slate-600">Caracterizaci&oacute;n prote&oacute;mica y an&aacute;lisis por espectrometr&iacute;a de masas.</p></div>
+                <div class="rounded-2xl border border-violet-100 bg-violet-50 p-5"><i class="fa-solid fa-microscope text-xl text-violet-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Biología celular · análisis molecular</p><h3 class="mt-2 font-bold text-slate-800">Microscop&iacute;a confocal</h3><p class="mt-1 text-sm text-slate-600">Visualizaci&oacute;n y estudio de interacciones moleculares en c&eacute;lulas.</p></div>
+                <div class="rounded-2xl border border-cyan-100 bg-cyan-50 p-5"><i class="fa-solid fa-scissors text-xl text-cyan-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Biología molecular · análisis funcional</p><h3 class="mt-2 font-bold text-slate-800">Edici&oacute;n CRISPR-Cas</h3><p class="mt-1 text-sm text-slate-600">Perturbaci&oacute;n y an&aacute;lisis funcional de genes y elementos reguladores.</p></div>
+                <div class="rounded-2xl border border-emerald-100 bg-emerald-50 p-5"><i class="fa-solid fa-server text-xl text-emerald-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Bioinformática · análisis de datos</p><h3 class="mt-2 font-bold text-slate-800">Cl&uacute;ster HPC</h3><p class="mt-1 text-sm text-slate-600">Procesamiento de datos y flujos reproducibles en c&oacute;mputo de alto rendimiento.</p></div>
+                <div class="rounded-2xl border border-violet-100 bg-violet-50 p-5"><i class="fa-solid fa-brain text-xl text-violet-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Bioinformática · análisis de datos</p><h3 class="mt-2 font-bold text-slate-800">Aprendizaje profundo</h3><p class="mt-1 text-sm text-slate-600">Modelos para integrar datos y explorar patrones en sistemas biol&oacute;gicos.</p></div>
+                <div class="rounded-2xl border border-cyan-100 bg-cyan-50 p-5"><i class="fa-solid fa-atom text-xl text-cyan-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Métodos computacionales · modelado</p><h3 class="mt-2 font-bold text-slate-800">Din&aacute;mica molecular</h3><p class="mt-1 text-sm text-slate-600">Simulaci&oacute;n de sistemas biomoleculares y an&aacute;lisis de sus interacciones.</p></div>
+                <div class="rounded-2xl border border-emerald-100 bg-emerald-50 p-5"><i class="fa-solid fa-capsules text-xl text-emerald-700" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Métodos computacionales · modelado</p><h3 class="mt-2 font-bold text-slate-800">Docking molecular</h3><p class="mt-1 text-sm text-slate-600">Evaluaci&oacute;n computacional de interacciones para apoyar el dise&ntilde;o de f&aacute;rmacos.</p></div>
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5"><i class="fa-solid fa-virus text-xl text-slate-500" aria-hidden="true"></i><p class="mt-2 text-xs font-mono uppercase tracking-wide text-teal-800">Cultivo celular · virología</p><h3 class="mt-2 font-bold text-slate-800">Información por confirmar</h3><p class="mt-1 text-sm text-slate-600">No se detallan técnicas concretas de cultivo celular o virología experimental en el contenido disponible.</p></div>
+            </div>
+            <div id="resources" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <article class="rounded-2xl border border-slate-200 p-6">
+                    <p class="text-sm font-mono uppercase tracking-wide text-teal-800">Recursos computacionales</p>
+                    <h3 class="mt-2 text-xl font-bold text-slate-800">Bioinformática y reproducibilidad</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">El sitio menciona análisis con R y Python, flujos en HPC/Slurm, aprendizaje profundo y modelado. No incluye enlaces a pipelines, scripts, protocolos o conjuntos de datos públicos concretos.</p>
+                    <ul class="mt-4 space-y-2 text-sm text-slate-600">
+                        <li><strong>Repositorio del grupo:</strong> <a class="text-teal-800 underline underline-offset-2" href="https://github.com/RNAGenomicsLab19" target="_blank" rel="noopener noreferrer">GitHub · RNAGenomicsLab19</a> — perfil confirmado en el contenido actual; repositorios específicos por identificar.</li>
+                        <li><strong>Recursos adicionales:</strong> [COMPLETAR: pipelines, herramientas, protocolos, conjuntos de datos y documentación reproducible, con enlaces verificados]</li>
+                    </ul>
+                </article>
+                <article class="rounded-2xl border border-slate-200 p-6">
+                    <p class="text-sm font-mono uppercase tracking-wide text-teal-800">Capacidades por confirmar</p>
+                    <h3 class="mt-2 text-xl font-bold text-slate-800">Cultivo celular y virología</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">El sitio menciona estudios relacionados con virología y una línea celular en un título de proyecto, pero no especifica técnicas de cultivo celular, virología experimental ni si se realizan en el laboratorio.</p>
+                    <p class="mt-3 text-sm text-slate-600">[VALIDAR: técnicas realizadas directamente y capacidades disponibles mediante colaboradores o servicios externos]</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="news" class="space-y-8">
+            <div class="section-banner">
+                <p class="text-sm font-mono uppercase tracking-widest">Actualidad académica</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight">Noticias y actividades</h2>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-relaxed text-slate-600 shadow-sm">
+                No hay noticias o actividades con fecha y enlace confirmados en la información disponible. Este espacio se actualizará cuando se documenten publicaciones recientes, congresos, seminarios, estancias, reconocimientos o actividades de formación.
+            </div>
+        </section>
+
+        <section id="contact" class="max-w-4xl mx-auto overflow-hidden bg-white rounded-3xl border border-slate-200 text-center shadow-xl">
+            <div class="section-banner rounded-none">
+                <h2 class="text-3xl font-bold tracking-tight">Contacto y colaboración</h2>
+                <p class="mt-2">Para consultas sobre colaboración científica, tesis o estancias, contacta al investigador responsable. Las oportunidades disponibles deben confirmarse directamente.</p>
+            </div>
+            <div class="p-8 sm:p-12">
+            <div class="mb-6 text-left">
+                <h3 class="font-bold text-slate-800">Colaboraciones y oportunidades académicas</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">El laboratorio estudia la biología del ARN, las interacciones ARN-proteína y la inmunidad innata, e integra enfoques experimentales y computacionales. Para proponer una colaboración, tesis o estancia, escribe al correo institucional verificado e indica tu tema de interés y periodo. Esta página no anuncia vacantes ni convocatorias activas.</p>
+                <p class="mt-2 text-sm text-slate-600"><a class="font-semibold text-teal-800 underline underline-offset-2" href="mailto:rodolfo.avilab@cinvestav.mx">rodolfo.avilab@cinvestav.mx</a></p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+                <a href="https://www.researchgate.net/profile/Rodolfo-Gamaliel-Avila-Bonilla" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition-all flex items-center gap-2"><i class="fa-brands fa-researchgate text-lg" aria-hidden="true"></i><span>ResearchGate</span></a>
+                <a href="https://scholar.google.com/citations?user=tyNRdtgAAAAJ&amp;hl=es" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold transition-all flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-cyan-700" aria-hidden="true"></i><span>Google Acad&eacute;mico</span></a>
+                <a href="https://github.com/RNAGenomicsLab19" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold transition-all flex items-center gap-2"><i class="fa-brands fa-github text-lg" aria-hidden="true"></i><span>GitHub &middot; RNAGenomicsLab19</span></a>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-800 mt-20 py-8 bg-darkbg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
+            <p>© 2026 Laboratorio 19 · Genómica y Biología Molecular de ARNs, Cinvestav.</p>
+            <p class="font-mono text-cyan-500">Diseñado para investigación científica y bioinformática</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+            mobileMenuBtn.setAttribute('aria-label', isExpanded ? 'Abrir menú de navegación' : 'Cerrar menú de navegación');
+            mobileMenu.classList.toggle('hidden', isExpanded);
+        });
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target instanceof Element && event.target.closest('a')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+                mobileMenuBtn.focus();
+            }
+        });
+
+        const projectLineFilter = document.getElementById('project-line-filter');
+        const projectStatusFilter = document.getElementById('project-status-filter');
+        const projectCards = Array.from(document.querySelectorAll('[data-project]'));
+        const projectEmptyState = document.getElementById('project-empty-state');
+        const projectFilterStatus = document.getElementById('project-filter-status');
+
+        function filterProjects() {
+            const line = projectLineFilter.value;
+            const status = projectStatusFilter.value;
+            let visibleCount = 0;
+
+            projectCards.forEach((card) => {
+                const matchesLine = line === 'all' || card.dataset.line === line;
+                const matchesStatus = status === 'all' || card.dataset.status === status;
+                const isVisible = matchesLine && matchesStatus;
+                card.hidden = !isVisible;
+                if (isVisible) visibleCount += 1;
+            });
+
+            projectEmptyState.hidden = visibleCount > 0;
+            projectFilterStatus.textContent = `${visibleCount} ${visibleCount === 1 ? 'proyecto visible' : 'proyectos visibles'}.`;
+        }
+
+        projectLineFilter.addEventListener('change', filterProjects);
+        projectStatusFilter.addEventListener('change', filterProjects);
+        filterProjects();
+    </script>
+</body>
+</html>
